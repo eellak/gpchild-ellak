@@ -57,7 +57,7 @@
 }
 .header-login {
 	float: right;
-	right: 100px;
+	right: 1.5em;
 	margin-top: 40px;
 	padding: 0;
 	position: absolute;;
@@ -121,7 +121,12 @@
 .social-link-flickr:hover a:before {
 	color: #ff0084;
 }
-
+.social-link-rss a:before {
+	content: "\f09e";
+}
+.social-link-rss:hover a:before {
+	color: #f58220;
+}
 .main-navigation,
 .main-navigation ul ul {
 	background-color: #f58220;
@@ -133,10 +138,30 @@
 	background-color: #eb4323;
 }
 .smooth_slider {
-	padding: 15px;
+	padding: 0 25px;
 	width: 100%;
 	box-sizing: border-box;
 	margin-bottom: 25px;
+}
+.smooth_slider .smooth_sliderb {
+	position: relative;
+	width: 95%;
+    text-align: justify;
+}
+.smooth_slider .smooth_slideri {
+    position: absolute;
+    width: 100% !important;
+    height: auto !important;
+    padding: 25px 15px;
+}
+.smooth_slider .smooth_slideri h2 {
+	text-align: left;
+}
+.smooth_slider .smooth_slideri span {
+	text-align: left;
+}
+.separate-containers .widget-area .widget_advanced_text {
+	padding: 40px 30px;
 }
 .separate-containers .widget-area .widget_advanced_text {
 	padding: 40px 30px;
@@ -162,7 +187,16 @@
 .paging-navigation .current {
 	font-weight: bold;
 }
-
+.site-info {
+    padding-top: 20px;
+    padding-right: 0px;
+    padding-bottom: 20px;
+    padding-left: 0px;
+    font-size: 14px;
+}
+.site-info a:hover {
+	color: #f1f1f1;
+}
 @media only screen and (min-width: 769px) {
 	#primary {
 		width: 70%;
@@ -177,4 +211,9 @@
 		float: left;
 		margin: 0 0 20px;
 	}
+	.header-login {
+        float: left;
+		margin: 0.5em 0 1em 5em;
+		position: relative;
+}
 }

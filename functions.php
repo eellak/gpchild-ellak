@@ -83,6 +83,7 @@ function ellak_social_links() { ?>
 			<li class="social-link-github"><a href="https://github.com/eellak" target="_blank"><span>GitHub</span></a></li>
 			<li class="social-link-vimeo"><a href="https://www.vimeo.com/eellak" target="_blank"><span>Vimeo</span></a></li>
 			<li class="social-link-flickr"><a href="https://flickr.com/photos/eellak" target="_blank"><span>Flickr</span></a></li>
+			<li class="social-link-rss"><a href="https://ellak.gr/rss-feeds/" target="_blank"><span>RSS</span></a></li>
 		</ul>
 	</div><!-- .header-social-links -->
 <?php }
@@ -90,13 +91,15 @@ function ellak_social_links() { ?>
 // footer
 add_action( 'generate_credits', 'ellak_credits' );
 function ellak_credits() {
-	echo __( '<a href="https://mathe.ellak.gr/" target="_blank">Υλοποίηση με χρήση του Ανοικτού Λογισμικού</a>', 'gpchild-ellak' )
+	echo __( '<a href="https://mathe.ellak.gr/" target="_blank">Υλοποίηση με χρήση του Ανοικτού Λογισμικού</a>', 'gpchild-ellak-opengov' )
 		. ' <a href="https://wordpress.org/" target="_blank">Wordpress</a> | '
 		. '<a href="https://ellak.gr/ori-chrisis" target="_blank">'
-		. __( 'Όροι Χρήσης & Δήλωση Απορρήτου', 'gpchild-ellak' ) . '</a> | '
+		. __( 'Όροι Χρήσης & Δήλωση Απορρήτου', 'gpchild-ellak-opengov' ) . '</a> | '
 		. __( 'Άδεια χρήσης περιεχομένου:', 'gpchild-ellak' )
 		. ' <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.el">'
-		. __( 'CC-BY-SA', 'gpchild-ellak' ) . '</a>';
+		. __( 'CC-BY-SA', 'gpchild-ellak' ) . '</a> | '
+		. ' <a href="https://ellak.gr/stichia-epikinonias-chartis/">'
+		. __( 'Επικοινωνία', 'gpchild-ellak' ) . '</a>';
 }
 remove_filter( 'wprss_pagination', 'wprss_pagination_links' );
 ?>
