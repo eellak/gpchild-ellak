@@ -31,6 +31,15 @@ function ellak_font_awesome() {
 	wp_enqueue_script( 'facebook-sdk', get_stylesheet_directory_uri() . '/js/facebook.js', array(), '2.3', true );
 }
 
+// Remove query strings from static files
+// http://diywpblog.com/wordpress-optimization-remove-query-strings-from-static-resources/
+function _remove_script_version( $src ){
+        $parts = explode( '?ver', $src );
+        return $parts[0];
+}
+add_filter( 'script_loader_src', '_remove_script_version', 15, 1 );
+add_filter( 'style_loader_src', '_remove_script_version', 15, 1 );
+
 // add clearfix class in the header container
 add_filter( 'generate_inside_header_class', 'ellak_inside_header_classes' );
 function ellak_inside_header_classes( $classes ) {
