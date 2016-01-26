@@ -2,6 +2,22 @@
 
 /* functions, filters and hooks for ellak.gr child theme */
 
+# axil 2015-09-06
+# http://diywpblog.com/wordpress-optimization-remove-query-strings-from-static-resources/
+function _remove_script_version( $src ){
+	$parts = explode( '?ver', $src );
+        return $parts[0];
+}
+add_filter( 'script_loader_src', '_remove_script_version', 15, 1 );
+add_filter( 'style_loader_src', '_remove_script_version', 15, 1 );
+
+# Mediawiki SSO
+add_action('wp_logout', 'mw_logout');
+function mw_logout() {
+    $cookiesSet = array_keys($_COOKIE);
+    for ($x=0;$x<count($cookiesSet);$x++) setcookie($cookiesSet[$x],"",time()-1);
+}
+
 add_action( 'after_setup_theme', 'ellak_theme_setup' );
 function ellak_theme_setup() {
 	// remove generatepress action hooks
@@ -61,21 +77,6 @@ function ellak_slider() {
 // social links
 add_action( 'generate_before_header_content', 'ellak_social_links' );
 function ellak_social_links() { ?>
-	<div class="header-login">
-				<?php if( is_user_logged_in() ): ?>
-				<a href="<?php echo esc_url( get_edit_user_link() ); ?>"><?php _e( 'Ο λογαριασμός μου', 'gpchild-ellak' ); ?></a>
-				<a href="<?php echo esc_url( wp_logout_url( get_permalink() ) ); ?>"><?php _e( 'Αποσύνδεση', 'gpchild-ellak' ); ?></a>
-
-				<?php else:
-
-					if( get_option( 'users_can_register' ) ): ?>
-				<a href="<?php echo esc_url( wp_registration_url() ); ?>"><?php _e( 'Εγγραφή', 'gpchild-ellak' ); ?></a>
-				<?php	endif; // get_option ?>
-
-				<a href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Συνδεση', 'gpchild-ellak' ); ?></a>
-
-				<?php endif; // is_user_logged_in ?>
-			</div>
 	<div class="header-social-links">
 		<ul class="social-links">
 			<li class="social-link-facebook"><a href="https://www.facebook.com/eellak" target="_blank"><span>Facebook</span></a></li>
