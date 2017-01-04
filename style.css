@@ -127,6 +127,12 @@
 .social-link-rss:hover a:before {
 	color: #f58220;
 }
+.social-link-opinion a:before {
+	content: "\f086";
+}
+.social-link-opinion:hover a:before {
+	color: #008080;
+}
 .main-navigation,
 .main-navigation ul ul {
 	background-color: #f58220;
@@ -268,3 +274,68 @@
 	margin: 12px auto;
 	}
 }
+img#wpstats {
+display: none;
+}
+/*.main-navigation .main-nav ul li a, .menu-toggle, .main-navigation .mobile-bar-items a {
+    padding: 20px;
+    line-height: 20px;
+}
+.menucustom a {
+	font-size: 12px;
+    margin: -10px;
+}*/
+/*.menucustom:hover {
+    margin: -10px;
+}
+.menucustom:active {
+    margin: -10px;
+}*/
+
+
+/*STYLE FOR page-mitroo_sholion.php*/
+.school-container, .teacher-container, .lawyer-container{
+    margin-top: 6px;
+    margin-bottom: 8px;
+}
+
+.school-container.visible-label, .teacher-container.visible-label, .lawyer-container.visible-label{
+    color: #f58220;
+    font-size: 16px;
+    letter-spacing: .3px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 3px;
+    margin-bottom: 4px;
+}
+
+.school-container.hidden-details, .teacher-container.hidden-details, .lawyer-container.hidden-details{
+    color: grey;
+    font-size: 14px;
+    
+    margin-left:20px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+/*.school-container.hidden-details:hover{
+    color: darkgrey;
+}*/
+
+.hidden-details-block:hover{
+    color: #565656;
+}
+
+.details-label{
+    color: #e78f44;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 2px;
+    letter-spacing: .6px;
+}
+
+.details-content{
+    margin-left: 15px;
+}
+
+

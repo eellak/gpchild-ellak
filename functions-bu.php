@@ -47,37 +47,6 @@ function ellak_font_awesome() {
 	wp_enqueue_script( 'facebook-sdk', get_stylesheet_directory_uri() . '/js/facebook.js', array(), '2.3', true );
 }
 
-//enqueue boostrap scripts
-add_action('wp_enqueue_scripts', 'enqueue_bootstrap');
-function enqueue_bootstrap(){
-    //the css file
-    wp_enqueue_style('bootstrap_css_3.3', get_stylesheet_directory_uri().'/bootstrap.min.css');
-    
-    //the js file
-    wp_enqueue_script('bootstrap_js_3.3', get_stylesheet_directory_uri().'/js/bootstrap.min.js', array('jquery'), '3.3', false);
-}
-
-
-/** 
- * enqueue the scripts for the edu_fos archive page
- **/
-add_action('wp_enqueue_scripts', 'enqueue_edu_fos_js');
-function enqueue_edu_fos_js(){
-    wp_enqueue_script('edu_fos_js', get_stylesheet_directory_uri().'/js/edu_fos_js.js', array('jquery'), '0.1', false);
-}
-
-/**
- * Enqueue the style file for the edu_fos archive page
- **/
-if(!function_exists('archive_edu_fos_style')){
-    function archive_edu_fos_style(){
-        //if(is_page_template('archive-github_contributor.php')){
-            wp_enqueue_style('archive-edu_fos-style', get_stylesheet_directory_uri().'/css/archive-edu_fos-style.css');
-        //}
-    }
-}
-add_action('wp_enqueue_scripts', 'archive_edu_fos_style');
-
 // add clearfix class in the header container
 add_filter( 'generate_inside_header_class', 'ellak_inside_header_classes' );
 function ellak_inside_header_classes( $classes ) {

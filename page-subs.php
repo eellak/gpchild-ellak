@@ -76,7 +76,7 @@ get_header(); ?>
 
 			    <h1 class="entry-title"><?php the_title(); ?></h1> <!-- Page Title -->
 					<br/>
-					<h3>Δείτε το κάλεσμα στο <a href="https://ellak.gr/2015/12/katalogos-nomikon-pou-parechoun-ipiresies-schetikes-me-anichtes-technologies/">ellak.gr</a></h3>
+					<h3>Για να δείτε το κάλεσμα και να εγγραφείτε στον κατάλογο, πατήστε <a href="https://ellak.gr/2015/12/katalogos-nomikon-pou-parechoun-ipiresies-schetikes-me-anichtes-technologies/">εδώ</a></h3>
 					<div class="tbl-cont">
 				<?php
 
@@ -98,6 +98,7 @@ get_header(); ?>
 					// This will return an array of sub objects.
 					$subs = Ninja_Forms()->subs()->get( $args );
 					$names = Ninja_Forms()->subs()->get( $args );
+                                        echo var_dump($subs);
 					function cmp($a, $b)
 						{
 						    return strcmp($a->get_field( 226 ), $b->get_field( 226 ));
