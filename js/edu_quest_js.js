@@ -1,4 +1,4 @@
-jQuery(document).ready(function(){	
+jQuery(window).load(function(){	
 			var app = new Vue({
 				el: '#edu-quest-results',
 				
@@ -89,5 +89,5 @@ jQuery(document).ready(function(){
 					}
 				},
 			})
-			console.log('inside>e '+app.data.rows)
+			//console.log('inside>e '+app.data.rows)
 		})

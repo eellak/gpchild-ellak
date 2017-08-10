@@ -47,8 +47,9 @@ function ellak_font_awesome() {
 	wp_enqueue_script( 'facebook-sdk', get_stylesheet_directory_uri() . '/js/facebook.js', array(), '2.3', true );
 	
 	// Vue.js
-	wp_register_script( 'vue-js', 'https://unpkg.com/vue@2.3.4/dist/vue.js', null, null, null );
-	wp_enqueue_script( 'vue-js');
+//	wp_register_script( 'vue-js', 'https://unpkg.com/vue@2.4.2/dist/vue.min.js', null, '2.4.2', false );
+//	wp_enqueue_script( 'vue-js');
+	wp_enqueue_script( 'ellak-vue-js', get_stylesheet_directory_uri().'/js/vue.js', null, '2.4.2', false );
 }
 
 //enqueue boostrap scripts
@@ -68,7 +69,7 @@ function enqueue_bootstrap(){
 add_action('wp_enqueue_scripts', 'enqueue_edu_fos_js');
 function enqueue_edu_fos_js(){
     wp_enqueue_script('edu_fos_js', get_stylesheet_directory_uri().'/js/edu_fos_js.js', array('jquery'), '0.1', false);
-    wp_enqueue_script('edu_quest_js', get_stylesheet_directory_uri().'/js/edu_quest_js.js', array('jquery', 'vue-js', 'underscore'), '0.1', false);
+    wp_enqueue_script('edu_quest_js', get_stylesheet_directory_uri().'/js/edu_quest_js.js', array('ellak-vue-js', 'underscore'), '0.1', false);
 }
 
 /**
