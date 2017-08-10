@@ -44,9 +44,9 @@ else{
 	console.log(QUEST_ENTRIES)
 </script>
 
-<div id="quest-result-main-area">
+<div class="" id="quest-result-main-area">
 	<div class="inside-article">
-		<h2 class="title">ΠΙΝΑΚΑΣ ΑΝΟΙΧΤΟΥ ΛΟΓΙΣΜΙΚΟΥ ΣΤΗΝ Γ'ΒΑΘΜΙΑ ΕΚΠΑΙΔΕΥΣΗ</h2>
+		<h2 class="title">ΠΙΝΑΚΑΣ ΑΝΟΙΧΤΟΥ ΛΟΓΙΣΜΙΚΟΥ ΣΤΗΝ ΑΚΑΔΗΜΑΙΚΗ-ΕΡΕΥΝΗΤΙΚΗ ΚΟΙΝΟΤΗΤΑ</h2>
 
 		<div id="edu-quest-results">
 
@@ -57,10 +57,10 @@ else{
 						<li>Για αλφαβητική ταξινόμηση κάνετε κλικ στην κεφαλίδα της στήλης της προτίμησής σας.</li>
 						<li>Για εφαρμογή φίλτρων, κάντε κλικ στο πεδίο της προτίμησής σας. Έχετε δυνατότητα εφαρμογής έως και τριών φίλτρων παράλληλα, ίδρυμα, σχολή και μάθημα.</li>
 						<li>Για αναίρεση ενός φίλτρου κάνετε κλικ σε κάποιο από τα φίλτρα όπως αυτά εμφανίζονται στη σειρά. Για αναίρεση όλων των φίλτρων, κάνετε κλικ στο "ΚΑΘΑΡΙΣΜΟΣ ΦΙΛΤΡΩΝ".</li>
-						<li>Μπορείτε να συμπληρώσετε το ερωτηματολόγιο κάνοντας κλικ <a href="https://edu-quest.ellak.gr" target="_blank">εδώ</a>.</li>
 					</ul>
 				</div>
 			</section>
+
 
 			<section id="filter-section" v-show="filter_type['institution'] || filter_type['course'] || filter_type['department']">
 				<div id="edu-quest-current-filters">
@@ -83,9 +83,9 @@ else{
 			<table id="results-table">
 				<tr id="edu-quest-title-row">
 					<th class="edu-clickable" v-on:click="sort('institution')" v-bind:class="{ sorted: sort_by === 'institution', reverse: sort_reverse }" >ΙΔΡΥΜΑ</th>
-					<th class="edu-clickable" v-on:click="sort('department')" v-bind:class="{ sorted: sort_by === 'department', reverse: sort_reverse }" >ΣΧΟΛΗ</th>
+					<th class="edu-clickable" v-on:click="sort('department')" v-bind:class="{ sorted: sort_by === 'department', reverse: sort_reverse }" >ΤΜΗΜΑ</th>
 					<th class="edu-clickable" v-on:click="sort('course')" v-bind:class="{ sorted: sort_by === 'course', reverse: sort_reverse }" >ΜΑΘΗΜΑ</th>
-					<th class="edu-clickable" v-on:click="sort('course')" v-bind:class="{ sorted: sort_by === 'course', reverse: sort_reverse }" >ΛΟΓΙΣΜΙΚΟ</th>
+					<th class="edu-clickable" v-on:click="sort('software')" v-bind:class="{ sorted: sort_by === 'software', reverse: sort_reverse }" >ΛΟΓΙΣΜΙΚΟ</th>
 				</tr>
 
 				<tr v-for="item in projects" >
@@ -99,18 +99,45 @@ else{
 					</td>
 
 					<td v-html="item.course"
-							v-on:click="filterType('course', item.course)" ></td>
+						v-on:click="filterType('course', item.course)" >
+					</td>
+				<template v-if="item.software_url==''" >
+					<td>
+							<span	v-html="item.software" ></span>
+					</td>
+				</template>
+				<template v-else >
 					<td>
 						<a v-bind:href="item.software_url"
-							 v-html="item.software" target="_blank">
+							 v-html="item.software"
+							 target="_blank">
 						</a>
 					</td>
+				</template>
 
 				</tr>
 
 			</table>
+			
+			<section id="opendata-section">
+				<div id="edu-quest-opendata">
+					<h3>ΑΝΟΙΧΤΑ ΔΕΔΟΜΕΝΑ</h3>
+					<ul>
+						<?php if(is_user_logged_in()): ?>
+						<li>Για να κατεβάσετε τα αποτελέσματα του ερωτηματολογίου ως Ανοιχτά Δεδομένα υπό μορφή αρχείου csv, κάνετε κλικ <a href="<?= get_stylesheet_directory_uri().'/assets/files/edu_quest_opendata.csv'?>" target="_blank">εδώ</a></li>
+						<li>Τελευταία ενημέρωση: <strong><?php echo get_post_meta(6735, 'edu_quest_update_date', true) ?></strong></li>
+						<?php else: ?>
+						<li>Για να κατεβάσετε τα αποτελέσματα του ερωτηματολογίου ως Ανοιχτά Δεδομένα υπό μορφή αρχείου csv, εγγραφειτε στο site της <a href="https://www.ellak.gr/register" target="_blank">ΕΕΛΛΑΚ</a>.</li>
+						<?php endif; ?>
+						
+						<li>Μπορείτε να συμπληρώσετε το ερωτηματολόγιο κάνοντας κλικ <a href="https://edu-quest.ellak.gr" target="_blank">εδώ</a>.</li>
+					</ul>
 		</div>
+			</section>
+			
+		
 	</div>
+</div>
 </div>
 
 

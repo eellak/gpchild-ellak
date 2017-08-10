@@ -1,11 +1,11 @@
-jQuery(window).load(function(){	
+jQuery(document).ready(function(){	
 			var app = new Vue({
 				el: '#edu-quest-results',
 				
 				data: {
 					rows: QUEST_ENTRIES, // this is set on template
 					sort_by: 'institution',
-					sort_reverse: true,
+					sort_reverse: false,
 					filter_type: {
 						institution: '',
 						department: '',
@@ -19,11 +19,13 @@ jQuery(window).load(function(){
 						var _that = this
 
 						this.filter_type[type] = key || ''
+						this.scroll_to_top()
 					},
 					
 					clearFilter: function(type){
 						var _that = this
 						this.filter_type[type] = ''
+						this.scroll_to_top()
 					},
 					
 					clearFilters: function(){
@@ -31,6 +33,7 @@ jQuery(window).load(function(){
 						this.filter_type['institution'] = ''
 						this.filter_type['department'] = ''
 						this.filter_type['course'] = ''
+						this.filter_type['software'] = ''
 					},
 					
 					sort: function(key){
@@ -41,6 +44,11 @@ jQuery(window).load(function(){
 							this.sort_reverse = false
 							this.sort_by = key
 						}
+					},
+					
+					scroll_to_top: function(){
+						var results_scroll=jQuery('#quest-result-main-area').offset()
+						jQuery(window).scrollTop(results_scroll.top)
 					}
 				},
 				
@@ -58,7 +66,7 @@ jQuery(window).load(function(){
 //							})
 //						}
 //						else{
-							p = _.sortBy(this.rows, this.sort_by)
+							p = _.sortBy(this.rows, this.sort_by )
 						}
 
 						// filter
