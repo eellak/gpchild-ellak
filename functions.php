@@ -69,7 +69,9 @@ function enqueue_bootstrap(){
 add_action('wp_enqueue_scripts', 'enqueue_edu_fos_js');
 function enqueue_edu_fos_js(){
     wp_enqueue_script('edu_fos_js', get_stylesheet_directory_uri().'/js/edu_fos_js.js', array('jquery'), '0.1', false);
-    wp_enqueue_script('edu_quest_js', get_stylesheet_directory_uri().'/js/edu_quest_js.js', array('ellak-vue-js', 'underscore'), '0.1', false);
+    if(is_page_template('template-edu_quest_results.php')){
+      wp_enqueue_script('edu_quest_js', get_stylesheet_directory_uri().'/js/edu_quest_js.js', array('ellak-vue-js', 'underscore'), '0.1', false);
+    }
 }
 
 /**
