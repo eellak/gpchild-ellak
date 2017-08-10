@@ -136,6 +136,7 @@ get_header(); ?>
                                                     ?>
                                                     <div class='ellak-edu_fos fos-entry details-entry'>
                                                         <span class='ellak-edu_fos fos-entry details-label'>Θεματική: </span>
+<<<<<<< HEAD
                                                         <span class='ellak-edu_fos fos-entry details-value'>
                                                           <?php
                                                           foreach(get_the_terms(get_the_ID(), 'edu_fos_thematiki') as $temp_term){
@@ -145,6 +146,9 @@ get_header(); ?>
                                                           echo substr($out_str, 0, -2);
                                                           ?>
                                                         </span>
+=======
+                                                        <span class='ellak-edu_fos fos-entry details-value'><?php echo get_the_terms(get_the_ID(), 'edu_fos_thematiki')[0]->name; ?></span>
+>>>>>>> 986e24507d380716c3289de1137533c42cd6ccfb
                                                     </div>
                                                     <?php endif?>
                                                     <?php
@@ -152,6 +156,7 @@ get_header(); ?>
                                                     ?>
                                                     <div class='ellak-edu_fos fos-entry details-entry'>
                                                         <span class='ellak-edu_fos fos-entry details-label'>Γν. Αντικείμενο: </span>
+<<<<<<< HEAD
                                                         <span class='ellak-edu_fos fos-entry details-value'>
                                                           <?php
                                                           $out_str='';
@@ -161,6 +166,9 @@ get_header(); ?>
                                                           echo substr($out_str, 0, -2);
                                                           ?>
                                                         </span>
+=======
+                                                        <span class='ellak-edu_fos fos-entry details-value'><?php echo get_the_terms(get_the_ID(), 'edu_fos_antikimeno')[0]->name; ?></span>
+>>>>>>> 986e24507d380716c3289de1137533c42cd6ccfb
                                                     </div>
                                                     <?php endif?>
                                                     <?php
@@ -168,6 +176,7 @@ get_header(); ?>
                                                     ?>
                                                     <div class='ellak-edu_fos fos-entry details-entry'>
                                                         <span class='ellak-edu_fos fos-entry details-label'>Εκπ. Βαθμίδα: </span>
+<<<<<<< HEAD
                                                         <span class='ellak-edu_fos fos-entry details-value'>
                                                           <?php
                                                           $out_str='';
@@ -177,6 +186,9 @@ get_header(); ?>
                                                           echo substr($out_str, 0, -2);
                                                           ?>
                                                         </span>
+=======
+                                                        <span class='ellak-edu_fos fos-entry details-value'><?php echo get_the_terms(get_the_ID(), 'edu_fos_vathmida')[0]->name; ?></span>
+>>>>>>> 986e24507d380716c3289de1137533c42cd6ccfb
                                                     </div>
                                                     <?php endif?>
                                                     <?php
@@ -212,6 +224,7 @@ get_header(); ?>
                             endif;
                             ?>
                         </div>
+<<<<<<< HEAD
                           <div class='ellak-edu_fos paging-buttons ellak-container'>
                               <div class='ellak-edu_fos paging-buttons ellak-main-wrapper'>
                                   <div class='ellak-edu_fos paging-buttons ellak-button'>
@@ -219,6 +232,15 @@ get_header(); ?>
                                   </div>
                               </div>
                           </div>
+=======
+                                <div class='ellak-edu_fos paging-buttons ellak-container'>
+                                    <div class='ellak-edu_fos paging-buttons ellak-main-wrapper'>
+                                        <div class='ellak-edu_fos paging-buttons ellak-button'>
+                                        <?php echo paginate_links(); ?>
+                                        </div>
+                                    </div>
+                                </div>
+>>>>>>> 986e24507d380716c3289de1137533c42cd6ccfb
                     </div><!-- inside-article -->           
                                     
 			<?php do_action('generate_after_main_content'); ?>
