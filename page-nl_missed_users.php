@@ -31,6 +31,7 @@ $user_q=new WP_User_Query($user_q_args);
 $i=0;
 echo "<div>plithos=".sizeof($user_q->results)."</div>";
 
+<<<<<<< HEAD
 //var_dump($user_q->results);
 
 $ellak_newsletter=array();
