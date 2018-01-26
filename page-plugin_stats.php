@@ -64,14 +64,18 @@ get_header(); ?>
                     <table style="width: 100%;">     
       <?php
         foreach(array_keys($plugins_list) as $plugin_handle){
-            $is_plugin_active_network='is ';
+            $is_plugin_active_network='';
             $plugin_name=$plugins_list[$plugin_handle]["Name"];
+            $plugin_text_domain=$plugins_list[$plugin_handle]["TextDomain"];
+            //print_r($plugins_list[$plugin_handle]);
+            //echo '<br> <br>';
             //echo $plugin_handle.'<br>';
             if(is_plugin_active_for_network($plugin_handle)){
                 echo 'einai';
                 $is_plugin_active_network=' - network';
             }
-            echo "<th>$plugin_name"." ".$is_plugin_active_network."</th>";
+            //echo "<th>$plugin_name"." ".$is_plugin_active_network."</th>";
+            echo "<th>$plugin_name"." * ".$plugin_text_domain.$is_plugin_active_network."</th>";
             //echo var_dump($active_plugins__in_sites[$plugin_name]);
             foreach($active_plugins__in_sites[$plugin_name] as $current_site){
                 echo "<tr><td>$current_site</td></tr>";

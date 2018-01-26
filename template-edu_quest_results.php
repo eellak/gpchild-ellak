@@ -60,7 +60,6 @@ else{
 					</ul>
 				</div>
 			</section>
-			
 
 			<section id="filter-section" v-show="filter_type['institution'] || filter_type['course'] || filter_type['department']">
 				<div id="edu-quest-current-filters">
@@ -114,7 +113,7 @@ else{
 						</a>
 					</td>
 				</template>
-					
+				
 				</tr>
 
 			</table>

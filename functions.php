@@ -43,17 +43,21 @@ function ellak_font_awesome() {
 	wp_enqueue_style( 'font-awesome',
 		'//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' );
 
+
+
 	// Dequeue jquery-migrate
-	if(wp_script_is('jquery-migrate', 'enqueued') ){
-		wp_dequeue_script('jquery-migrate');
-	}
-	
+//	if(wp_script_is('jquery-migrate', 'enqueued') ){
+//		wp_dequeue_script('jquery-migrate');
+//	}
+
 	// Facebook SDK
 	wp_enqueue_script( 'facebook-sdk', get_stylesheet_directory_uri() . '/js/facebook.js', array(), '2.3', true );
 	
 	// Vue.js
+
 //	wp_register_script( 'vue-js', 'https://unpkg.com/vue@2.3.4/dist/vue.js', null, null, null );
 //	wp_enqueue_script( 'vue-js');
+
 }
 
 //enqueue boostrap scripts
@@ -73,7 +77,10 @@ function enqueue_bootstrap(){
 add_action('wp_enqueue_scripts', 'enqueue_edu_fos_js');
 function enqueue_edu_fos_js(){
     wp_enqueue_script('edu_fos_js', get_stylesheet_directory_uri().'/js/edu_fos_js.js', array('jquery'), '0.1', false);
-    wp_enqueue_script('edu_quest_js', get_stylesheet_directory_uri().'/js/edu_quest_js.js', array('jquery', 'vue-js', 'underscore'), '0.1', false);
+
+    if(is_page_template('template-edu_quest_results.php')){
+      wp_enqueue_script('edu_quest_js', get_stylesheet_directory_uri().'/js/edu_quest_js.js', array('ellak-vue-js', 'underscore'), '0.1', false);
+    }
 }
 
 /**
@@ -231,8 +238,10 @@ add_filter('manage_edu_quest_post_type_posts_columns', 'edu_quest_edit_columns')
 add_action('manage_edu_quest_post_type_posts_custom_column',  'edu_quest_custom_columns');
 if(!function_exists('edu_quest_edit_columns')){
 	function edu_quest_edit_columns($columns){
-		$client_string=__("Client", "ballian");
+
+		//$client_string=__("Client", "ballian");
 		$columns = array_merge($columns, array(
+				'course' => 'Μάθημα',
 				'software' => 'Λογισμικό',
 				'software_url' => 'URL λογισμικού',
 //				'category' => __('Category', 'ballian'),
@@ -248,6 +257,20 @@ if (!function_exists('edu_quest_custom_columns')) {
 //			$current_language= qtranxf_getLanguage();
 			global $post;
 			switch ($column) {
+
+				case 'course':
+				$terms = get_post_meta( $post->ID , 'edu_quest_course' );
+				if (!empty($terms)){
+//					foreach($terms as $term){
+//						$echoable=qtranxf_use($current_language, $term->name);
+//						$echoable_arr[]=$echoable;
+//					}
+					echo $terms[0];
+				}
+				else{
+					echo 'καμία καταχώρηση';
+				}
+				break;
 				case 'software':
 				$terms = get_post_meta( $post->ID , 'edu_quest_software' );
 				if (!empty($terms)){
@@ -280,7 +303,16 @@ if (!function_exists('edu_quest_custom_columns')) {
 	}
 }
 
-
+/* Include the diadose_bar plugin */
+add_action( 'generate_before_header', 'load_diadose_bar' );
+if( ! function_exists('load_diadose_bar')){
+		function load_diadose_bar(){
+				if(function_exists('diadose_bar')){
+						diadose_bar();
+				}
+		}
+}
+https://www.youtube.com/watch?v=oXo_Vu0Fyxw
 // Add to the admin_init action hook
 //add_filter('current_screen', 'my_current_screen' );
 // 
