@@ -36,10 +36,18 @@ get_header(); ?>
 //                                $thematiki_terms=get_terms('edu_fos_thematiki');
 //                                $antikimeno_terms=get_terms('edu_fos_antikimeno');
 //                                $vathmida_terms=get_terms('edu_fos_vathmida');
-                                ?>
+                                
+																if(strpos(get_bloginfo('wpurl'), 'dev')){
+																	$action_url = 'https://if:if@'.substr(esc_url(admin_url('admin-post.php')), 8);
+																}
+																else{
+																	$action_url = esc_url(admin_url('admin-post.php'));
+																}
+																?>
                                 <div class='ellak-edu_fos sort-controls'>
-                                    <form id='main-form' method='post' name='main-form' action='<?php echo esc_url(admin_url('admin-post.php')); ?>'>
+                                    <form id='main-form' method='post' name='main-form' action='<?php echo $action_url ?>'>
                                         <div class='ellak-edu_fos sort-controls ellak-label'>
+																						<?php echo 'https://if:if@'.substr(esc_url(admin_url('admin-post.php')), 8); ?>
                                             Ταξινόμηση κατά: 
                                         </div>
 																			
@@ -48,7 +56,7 @@ get_header(); ?>
                                                 <!--<span class='text'>θεματική</span>-->
                                             </a>
                                             <label for='thematiki-select'>Ίδρυμα:</label>
-                                            <select id='thematiki-select' class='ellak-edu_fos fos-category-select' name='thematiki'>
+                                            <select id='thematiki-select' class='ellak-edu_fos fos-category-select' name='institution'>
                                                 <option value='null_option'>ΚΑΝΕΝΑ ΦΙΛΤΡΟ</option>
                                                 <?php foreach($field_institution as $institution):?>
                                                 <option value='<?php echo str_replace(' ', '_', mb_strtolower(trim($institution->meta_value)));?> '><?php echo $institution->meta_value; ?></option>
@@ -57,11 +65,12 @@ get_header(); ?>
                                         </div>
 																			
                                         <div class='ellak-edu_fos sort-controls'>
-                                            <a href='/?post_type=edu_fos&contr_order=followers' class='ellak-edu_fos sort-controls by-followers ellak-disabled'>
+                                            <a href='/?post_type=edu_quest&contr_order=followers' class='ellak-edu_fos sort-controls by-followers ellak-disabled'>
                                                 <!--<span class='text'>γν. αντικείμενο</span>-->
                                             </a>
                                             <label for='antikimeno-select'>Τμήμα:</label>
-                                            <select id='antikimeno-select' class='ellak-edu_fos fos-category-select' name='antikimeno'>
+																						
+                                            <select id='antikimeno-select' class='ellak-edu_fos fos-category-select' name='department'>
                                                 <option value='null_option'>ΚΑΝΕΝΑ ΦΙΛΤΡΟ</option>
                                                 <?php foreach($field_department as $department):?>
                                                 <option value='<?php echo str_replace(' ', '_', mb_strtolower(trim($department->meta_value))); ?>'><?php echo $department->meta_value; ?></option>
@@ -74,25 +83,28 @@ get_header(); ?>
                                                 <!--<span class='text'>εκπ. βαθμίδα</span>-->
                                             </a>
                                             <label for='vathmida-select'>Μάθημα:</label>
-                                            <select id='vathmida-select' class='ellak-edu_fos fos-category-select' name='vathmida'>
+                                            <select id='vathmida-select' class='ellak-edu_fos fos-category-select' name='course'>
                                                 <option value='null_option'>ΚΑΝΕΝΑ ΦΙΛΤΡΟ</option>
                                                 <?php foreach($field_course as $course):?>
                                                 <option value='<?php echo str_replace(' ', '_', mb_strtolower(trim($course->meta_value))); ?>'><?php echo $course->meta_value; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
-                                        <input type='hidden' name='action' value='handle_edu_fos_query'>
+                                        <input type='hidden' name='action' value='handle_edu_quests_query'>
                                         <button type='submit' value='submit' class='ellak-edu_fos sort-controls filter_submit'>Υποβολή</button>
-                                    </form>    
+                                    </form>
                                 </div>
                             </div>
+														
+														
                             <!-- The section to make available the CSV file link -->
-                            <div class="ellak-edu_fos download-csv">
+<!--                            <div class="ellak-edu_fos download-csv">
                               <a href="https://edu.ellak.gr/wp-content/uploads/sites/11/2017/03/edu_fos_final.csv">
                                 <span class="ellak-edu_fos download-csv-text">Κατεβάστε όλα τα στοιχεία σε CSV.</span>
                               </a>  
-                            </div>
+                            </div>-->
                         </div>
+											
                         <div class='ellak-edu_fos fos-query-details main-wrapper'>
                             <div class='ellak-edu_fos fos-query-details padding-div'>
                                 <?php
@@ -118,6 +130,7 @@ get_header(); ?>
                                 ?>
                             </div>
                         </div>
+											
                         <div class='ellak-edu_fos fos-entry-set main-wrapper'>
                             <?php
                             if(have_posts()):
@@ -127,7 +140,7 @@ get_header(); ?>
                                         <div class='ellak-edu_fos fos-entry main-wrapper'>
                                             <div class='ellak-edu_fos fos-entry title-text-wrapper'>
                                                 <div class='ellak-edu_fos fos-entry title-text' role='button' data-toggle='collapse' data-target='#<?php the_ID(); ?>-details'>
-                                                    <?php the_title();?>
+                                                    <?php the_field('edu_quest_course', get_the_ID()) ?>
                                                 </div>
                                             </div>
                                             <div id='<?php the_ID(); ?>-details' class='ellak-edu_fos fos-entry details-container collapse'>
@@ -137,7 +150,7 @@ get_header(); ?>
                                                     ?>
                                                     <div class='ellak-edu_fos fos-entry details-entry'>
                                                         <span class='ellak-edu_fos fos-entry details-label'>Περιγραφή: </span>
-                                                        <span class='ellak-edu_fos fos-entry details-value'><?php the_content(); ?></span>
+                                                        <span class='ellak-edu_fos fos-entry details-value'><?php the_field('edu_quest_software', get_the_ID()); ?></span>
                                                     </div>
                                                     <?php endif?>
                                                     <?php
