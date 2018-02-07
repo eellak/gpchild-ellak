@@ -20,6 +20,7 @@ get_header(); ?>
 																$current_post_type='';
 																
 																global $wpdb;
+																global $wp_query;
 																//get blog_id here
 																$blog_id;
                                 //retrieve the distinct field contents tha will fill the select boxes.
@@ -38,16 +39,20 @@ get_header(); ?>
 //                                $vathmida_terms=get_terms('edu_fos_vathmida');
                                 
 																if(strpos(get_bloginfo('wpurl'), 'dev')){
-																	$action_url = 'https://if:if@'.substr(esc_url(admin_url('admin-post.php')), 8);
+//																	$action_url = esc_url('https://if:if@'.substr(admin_url('admin-post.php')), 8);
+																	$action_url = esc_url(admin_url('admin-post.php'));
 																}
 																else{
 																	$action_url = esc_url(admin_url('admin-post.php'));
 																}
 																?>
-                                <div class='ellak-edu_fos sort-controls'>
+                                <div class='ellak-edu_fos sort-controls sort-controls-outer'>
                                     <form id='main-form' method='post' name='main-form' action='<?php echo $action_url ?>'>
                                         <div class='ellak-edu_fos sort-controls ellak-label'>
-																						<?php echo 'https://if:if@'.substr(esc_url(admin_url('admin-post.php')), 8); ?>
+																						<?php
+//																							echo esc_url('https://if:if@'.substr(admin_url('admin-post.php')), 8);
+//																							echo $action_url = esc_url(admin_url('admin-post.php'));
+																						?>
                                             Ταξινόμηση κατά: 
                                         </div>
 																			
@@ -56,10 +61,10 @@ get_header(); ?>
                                                 <!--<span class='text'>θεματική</span>-->
                                             </a>
                                             <label for='thematiki-select'>Ίδρυμα:</label>
-                                            <select id='thematiki-select' class='ellak-edu_fos fos-category-select' name='institution'>
+                                            <select id='thematiki-select' class='ellak-edu_fos fos-category-select cf' name='institution'>
                                                 <option value='null_option'>ΚΑΝΕΝΑ ΦΙΛΤΡΟ</option>
                                                 <?php foreach($field_institution as $institution):?>
-                                                <option value='<?php echo str_replace(' ', '_', mb_strtolower(trim($institution->meta_value)));?> '><?php echo $institution->meta_value; ?></option>
+                                                <option value='<?php echo urlencode($institution->meta_value) ?> '><?php echo $institution->meta_value; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -70,10 +75,10 @@ get_header(); ?>
                                             </a>
                                             <label for='antikimeno-select'>Τμήμα:</label>
 																						
-                                            <select id='antikimeno-select' class='ellak-edu_fos fos-category-select' name='department'>
+                                            <select id='antikimeno-select' class='ellak-edu_fos fos-category-select cf' name='department'>
                                                 <option value='null_option'>ΚΑΝΕΝΑ ΦΙΛΤΡΟ</option>
                                                 <?php foreach($field_department as $department):?>
-                                                <option value='<?php echo str_replace(' ', '_', mb_strtolower(trim($department->meta_value))); ?>'><?php echo $department->meta_value; ?></option>
+                                                <option value='<?php echo urlencode($department->meta_value) ?>'><?php echo $department->meta_value; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -83,14 +88,14 @@ get_header(); ?>
                                                 <!--<span class='text'>εκπ. βαθμίδα</span>-->
                                             </a>
                                             <label for='vathmida-select'>Μάθημα:</label>
-                                            <select id='vathmida-select' class='ellak-edu_fos fos-category-select' name='course'>
+                                            <select id='vathmida-select' class='ellak-edu_fos fos-category-select cf' name='course'>
                                                 <option value='null_option'>ΚΑΝΕΝΑ ΦΙΛΤΡΟ</option>
                                                 <?php foreach($field_course as $course):?>
-                                                <option value='<?php echo str_replace(' ', '_', mb_strtolower(trim($course->meta_value))); ?>'><?php echo $course->meta_value; ?></option>
+                                                <option value='<?php echo urlencode($course->meta_value) ?>'><?php echo $course->meta_value; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
-                                        <input type='hidden' name='action' value='handle_edu_quests_query'>
+                                        <input type='hidden' name='action' value='handle_edu_quest_query'>
                                         <button type='submit' value='submit' class='ellak-edu_fos sort-controls filter_submit'>Υποβολή</button>
                                     </form>
                                 </div>
@@ -133,66 +138,53 @@ get_header(); ?>
 											
                         <div class='ellak-edu_fos fos-entry-set main-wrapper'>
                             <?php
-                            if(have_posts()):
-                                while(have_posts()):
-                                    the_post();
+                            if($wp_query->have_posts()):
+                                while($wp_query->have_posts()):
+                                    $wp_query->the_post();
                                     if(get_the_title()!==null && strcmp(get_the_title(), '')):?>
                                         <div class='ellak-edu_fos fos-entry main-wrapper'>
+																					
                                             <div class='ellak-edu_fos fos-entry title-text-wrapper'>
                                                 <div class='ellak-edu_fos fos-entry title-text' role='button' data-toggle='collapse' data-target='#<?php the_ID(); ?>-details'>
-                                                    <?php the_field('edu_quest_course', get_the_ID()) ?>
+                                                    <?php the_field('edu_quest_software', get_the_ID()) ?>
                                                 </div>
                                             </div>
+																					
                                             <div id='<?php the_ID(); ?>-details' class='ellak-edu_fos fos-entry details-container collapse'>
                                                 <div class='ellak-edu_fos fos-entry details-wrapper'>
-                                                    <?php $tmp=get_the_content();
+                                                    <?php $tmp=get_field('edu_quest_institution');
                                                     if(isset($tmp) && strcmp($tmp, '')):
                                                     ?>
                                                     <div class='ellak-edu_fos fos-entry details-entry'>
-                                                        <span class='ellak-edu_fos fos-entry details-label'>Περιγραφή: </span>
-                                                        <span class='ellak-edu_fos fos-entry details-value'><?php the_field('edu_quest_software', get_the_ID()); ?></span>
+                                                        <span class='ellak-edu_fos fos-entry details-label'>Ίδρυμα: </span>
+                                                        <span class='ellak-edu_fos fos-entry details-value'><?php the_field('edu_quest_institution', get_the_ID()); ?></span>
                                                     </div>
                                                     <?php endif?>
+																									
                                                     <?php
-                                                    if(isset(get_post_meta(get_the_ID(), 'edu_fos_url')[0]) && strcmp(get_post_meta(get_the_ID(), 'edu_fos_url')[0], '')):
+                                                    if(get_field('edu_quest_department', get_the_ID()) && strcmp(get_field('edu_quest_department', get_the_ID()), '')):
+                                                    ?>
+                                                    <div class='ellak-edu_fos fos-entry details-entry'>
+                                                        <span class='ellak-edu_fos fos-entry details-label'>Τμήμα: </span>
+																													<span class='ellak-edu_fos fos-entry details-value'><?php echo get_field('edu_quest_department', get_the_ID()) ?></span>
+                                                    </div>
+                                                    <?php endif?>
+																									
+                                                    <?php $tmp;
+                                                    if(get_field('edu_quest_course', get_the_ID()) && strcmp(get_field('edu_quest_course', get_the_ID()), '')):
+                                                    ?>
+                                                    <div class='ellak-edu_fos fos-entry details-entry'>
+                                                        <span class='ellak-edu_fos fos-entry details-label'>Μάθημα: </span>
+                                                        <span class='ellak-edu_fos fos-entry details-value'><?php echo get_field('edu_quest_course', get_the_ID()) ?></span>
+                                                    </div>
+                                                    <?php endif?>
+                                                    
+																										<?php
+                                                    if(get_field('edu_quest_software_url', get_the_ID()) && strcmp(get_field('edu_quest_software_url', get_the_ID()), '')):
                                                     ?>
                                                     <div class='ellak-edu_fos fos-entry details-entry'>
                                                         <span class='ellak-edu_fos fos-entry details-label'>URL: </span>
-                                                        <a href='<?php echo get_post_meta(get_the_ID(), 'edu_fos_url')[0]; ?>' target='_blank'>
-                                                            <span class='ellak-edu_fos fos-entry details-value'><?php echo get_post_meta(get_the_ID(), 'edu_fos_url')[0]; ?></span>
-                                                        </a>
-                                                    </div>
-                                                    <?php endif?>
-                                                    <?php $tmp;
-                                                    if(isset(get_the_terms(get_the_ID(), 'edu_fos_thematiki')[0]->name) && strcmp(get_the_terms(get_the_ID(), 'edu_fos_thematiki')[0]->name, '')):
-                                                    ?>
-                                                    <div class='ellak-edu_fos fos-entry details-entry'>
-                                                        <span class='ellak-edu_fos fos-entry details-label'>Θεματική: </span>
-                                                        <span class='ellak-edu_fos fos-entry details-value'>
-                                                          <?php
-                                                          foreach(get_the_terms(get_the_ID(), 'edu_fos_thematiki') as $temp_term){
-                                                            $out_str='';
-                                                            $out_str=$out_str.$temp_term->name.', ';
-                                                          }
-                                                          echo substr($out_str, 0, -2);
-                                                          ?>
-                                                        </span>
-                                                    </div>
-                                                    <?php endif?>
-                                                    <?php
-                                                    if(isset(get_the_terms(get_the_ID(), 'edu_fos_antikimeno')[0]->name) && strcmp(get_the_terms(get_the_ID(), 'edu_fos_antikimeno')[0]->name, '')):
-                                                    ?>
-                                                    <div class='ellak-edu_fos fos-entry details-entry'>
-                                                        <span class='ellak-edu_fos fos-entry details-label'>Γν. Αντικείμενο: </span>
-                                                        <span class='ellak-edu_fos fos-entry details-value'>
-                                                          <?php
-                                                          $out_str='';
-                                                          foreach(get_the_terms(get_the_ID(), 'edu_fos_antikimeno') as $temp_term){
-                                                            $out_str=$out_str.$temp_term->name.', ';
-                                                          }
-                                                          echo substr($out_str, 0, -2);
-                                                          ?>
-                                                        </span>
+																												<span class='ellak-edu_fos fos-entry details-value'><a href="<?php echo get_field('edu_quest_software_url', get_the_ID()) ?>" target="_blank">click here</a></span>
                                                     </div>
                                                     <?php endif?>
                                                     <?php
@@ -248,6 +240,7 @@ get_header(); ?>
                               <div class='ellak-edu_fos paging-buttons ellak-main-wrapper'>
                                   <div class='ellak-edu_fos paging-buttons ellak-button'>
                                   <?php echo paginate_links(); ?>
+                                  <?php // var_dump($wp_query); ?>
                                   </div>
                               </div>
                           </div>

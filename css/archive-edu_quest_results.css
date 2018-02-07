@@ -1,0 +1,17 @@
+main .inside-article .title.controls .sort-controls-outer {
+  width: 100%;
+  display: block;
+}
+main .inside-article .title.controls .sort-controls-outer form#main-form .sort-controls label {
+  display: inline-block;
+  width: 100%;
+  max-width: 120px;
+}
+main .inside-article .title.controls .sort-controls-outer form#main-form .sort-controls select {
+  width: calc(100% - 130px);
+}
+main .inside-article .title.controls .cf::after {
+  content: "";
+  clear: both;
+  display: table;
+}

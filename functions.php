@@ -90,7 +90,8 @@ if(!function_exists('archive_edu_fos_style')){
     function archive_edu_fos_style(){
         //if(is_page_template('archive-github_contributor.php')){
             wp_enqueue_style('archive-edu_fos-style', get_stylesheet_directory_uri().'/css/archive-edu_fos-style.css');
-            wp_enqueue_style('archive-edu_quest_results-style', get_stylesheet_directory_uri().'/css/template-edu_quest_results.css');
+            wp_enqueue_style('archive-edu_quest-results-style', get_stylesheet_directory_uri().'/css/archive-edu_quest_results.css');
+            wp_enqueue_style('template-edu_quest_results-style', get_stylesheet_directory_uri().'/css/template-edu_quest_results.css');
         //}
     }
 }
