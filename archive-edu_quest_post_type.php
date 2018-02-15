@@ -244,6 +244,24 @@ get_header(); ?>
                                   </div>
                               </div>
                           </div>
+											
+											
+											<section id="opendata-section">
+												<div id="edu-quest-opendata">
+													<h3>ΑΝΟΙΧΤΑ ΔΕΔΟΜΕΝΑ</h3>
+													<ul>
+														<?php if(is_user_logged_in()): ?>
+														<li>Για να κατεβάσετε τα αποτελέσματα του ερωτηματολογίου ως Ανοιχτά Δεδομένα υπό μορφή αρχείου csv, κάνετε κλικ <a href="<?= get_stylesheet_directory_uri().'/assets/files/edu_quest_opendata.csv'?>" target="_blank">εδώ</a></li>
+														<li>Τελευταία ενημέρωση: <strong><?php echo get_post_meta(6735, 'edu_quest_update_date', true) ?></strong></li>
+														<?php else: ?>
+														<li>Για να κατεβάσετε τα αποτελέσματα του ερωτηματολογίου ως Ανοιχτά Δεδομένα υπό μορφή αρχείου csv, εγγραφειτε στο site της <a href="https://www.ellak.gr/register" target="_blank">ΕΕΛΛΑΚ</a>.</li>
+														<?php endif; ?>
+
+														<li>Μπορείτε να συμπληρώσετε το ερωτηματολόγιο κάνοντας κλικ <a href="https://edu-quest.ellak.gr" target="_blank">εδώ</a>.</li>
+													</ul>
+												</div>
+											</section>
+											
                     </div><!-- inside-article -->           
                                     
 			<?php do_action('generate_after_main_content'); ?>

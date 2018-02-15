@@ -313,7 +313,6 @@ if( ! function_exists('load_diadose_bar')){
 				}
 		}
 }
-https://www.youtube.com/watch?v=oXo_Vu0Fyxw
 // Add to the admin_init action hook
 //add_filter('current_screen', 'my_current_screen' );
 // 
