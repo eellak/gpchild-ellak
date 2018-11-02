@@ -128,6 +128,15 @@ if (!function_exists('register_edu_quest_post_type')){
 }
 add_action('init', 'register_edu_quest_post_type');
 
+// Remove query strings from static files
+// http://diywpblog.com/wordpress-optimization-remove-query-strings-from-static-resources/
+function _remove_script_version( $src ){
+        $parts = explode( '?ver', $src );
+        return $parts[0];
+}
+add_filter( 'script_loader_src', '_remove_script_version', 15, 1 );
+add_filter( 'style_loader_src', '_remove_script_version', 15, 1 );
+
 // add clearfix class in the header container
 add_filter( 'generate_inside_header_class', 'ellak_inside_header_classes' );
 function ellak_inside_header_classes( $classes ) {
